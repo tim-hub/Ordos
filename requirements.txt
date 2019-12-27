@@ -1,0 +1,4 @@
+python==3.7.5
+markdown2==2.3.8
+jinja2==2.10.3
+pyfiglet==0.8.post1
