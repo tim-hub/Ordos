@@ -1,7 +1,9 @@
 import unittest
-from generator.core import mds_to_htmls, format_markdown, format_meta
+
+from generator.md_utils import mds_to_htmls, format_markdown, format_meta
 from generator.md_io import get_all_markdowns
 from settings import THE_PATH as the_path
+
 
 class CoreTestCase(unittest.TestCase):
     def test_html(self):

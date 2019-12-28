@@ -13,3 +13,6 @@ command:str = sys.argv[1]
 
 if command == 'generate':
     print('to run')
+
+# force regenerate
+# view locally

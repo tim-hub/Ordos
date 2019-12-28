@@ -11,3 +11,6 @@ def get_all_dirs(the_path:str) -> List[str]:
 
 def get_all_markdowns(the_path:str) -> List[str]:
     return [f for f in glob.glob(path.abspath(the_path) + '/**/*.[Mm][Dd]', recursive=True)]
+
+def save_all_htmls(html: List[str]) -> None:
+    return
