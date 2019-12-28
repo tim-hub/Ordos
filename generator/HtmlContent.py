@@ -3,7 +3,7 @@ import hashlib
 from markdown2 import markdown
 
 from custom_typings import ContentType, ContentName
-from generator.md_utils import get_md_content, get_md_name, get_content_type, format_markdown
+from generator.utils import get_md_content, get_md_name, get_content_type, format_markdown
 from settings import MARKDOWN_EXTRA
 
 
@@ -35,9 +35,9 @@ class HtmlContent:
         return get_md_content(self.path)
 
     @property
-    def html(self):
+    def content_html(self):
         return markdown(format_markdown(self.content), extras=MARKDOWN_EXTRA)
 
     @property
     def metadata(self):
-        return self.html.metadata
+        return self.content_html.metadata

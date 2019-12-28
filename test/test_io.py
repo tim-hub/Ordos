@@ -1,7 +1,7 @@
 import unittest
-from generator.md_io import get_all_markdowns
-from settings import THE_PATH as the_path
 
+from generator.io import get_all_markdowns
+from settings import THE_PATH as the_path
 
 
 class IOSTestCase(unittest.TestCase):
@@ -11,7 +11,7 @@ class IOSTestCase(unittest.TestCase):
         self.assertLessEqual(1, len(r))
         for md in r:
             # all are markdowns
-            self.assertRegex(md[len(md)-3:], r'.[Mm][Dd]')
+            self.assertRegex(md[len(md) - 3:], r'.[Mm][Dd]')
             with open(md, 'r') as file:
                 self.assertNotEqual(file.read().find('---'), -1, md)
 

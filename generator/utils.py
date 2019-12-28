@@ -5,7 +5,7 @@ from typing import List
 from markdown2 import markdown
 
 from custom_typings import NameHtmlTuple, ContentType, ContentName
-from generator.md_io import get_all_markdowns
+from generator.io import get_all_markdowns
 from settings import META_SEPARATOR, MARKDOWN_EXTRA
 
 
@@ -34,9 +34,9 @@ def format_markdown(md_content: str) -> str:
 
 
 def get_content_type(md_path: str) -> ContentType:
-    if md_path.find(ContentType.HIDDEN.value) > -1:
+    if md_path.find(ContentType.HIDDEN.value.lower()) > -1:
         return ContentType.HIDDEN
-    elif md_path.find(ContentType.LIST.value) > -1:
+    elif md_path.find(ContentType.LIST.value.lower()) > -1:
         return ContentType.LIST
     else:
         return ContentType.COMMON
@@ -46,6 +46,7 @@ def get_md_name(md_path: str) -> ContentName:
     the_name: str = str(ntpath.basename(md_path))
 
     return ContentName(the_name[:len(the_name) - 3])
+
 
 def get_md_content(md_path: str) -> str:
     with open(md_path, 'r') as file:
