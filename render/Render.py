@@ -1,6 +1,7 @@
 import hashlib
 from os import path
-from jinja2 import Environment, PackageLoader, select_autoescape, Template, FileSystemLoader
+
+from jinja2 import Environment, select_autoescape, Template, FileSystemLoader
 
 
 class Render:
@@ -13,13 +14,49 @@ class Render:
             ),
             loader=FileSystemLoader(path.abspath(self._templates_dir))
         )
-        print(self._env)
-        content_template = self._env.get_template('content.html')
-        # template = Template('Hello {{ name }}!')
-        print(content_template.render(content=123))
 
     def __hash__(self):
-        return hashlib.sha256(self._env).hexdigest()
+        return hash(self._env)
 
     def __eq__(self, other: any) -> bool:
         return hash(self) == hash(other)
+
+    @property
+    def content(self) -> Template:
+        return self._env.get_template('content.html')
+
+    @property
+    def home(self):
+        return self._env.get_template('home.html')
+
+    @property
+    def archive(self):
+        '''
+        a collections of all contents
+        :return:
+        '''
+        return self._env.get_template('archive.html')
+
+    @property
+    def list(self):
+        '''
+        a collection of contents list only
+        :return:
+        '''
+        return self._env.get_template('list.html')
+
+
+    def get_content_html(self, data) -> str:
+        return self.content.render({'data':data})
+
+
+    def get_home_html(self, data)-> str:
+        return self.home.render(data)
+
+
+    def get_archive_html(self, data)-> str:
+        return self.archive.render(data)
+
+
+    def get_list_html(self, data) -> str:
+        return self.list.render(data)

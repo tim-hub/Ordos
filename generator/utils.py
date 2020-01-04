@@ -5,9 +5,9 @@ from typing import List
 from markdown2 import markdown
 
 from custom_typings import NameHtmlTuple, ContentType, ContentName
-from generator.io import get_all_markdowns
+from utils.io import get_all_markdowns
 from settings import META_SEPARATOR, MARKDOWN_EXTRA
-
+from os import chdir
 
 def format_meta(md_meta: str) -> str:
     def join_two_lines(a: str, b: str) -> str:
@@ -64,3 +64,13 @@ def mds_to_htmls(the_path: str) -> List[NameHtmlTuple]:
                 )
 
     return list(map(md_to_html, get_all_markdowns(the_path)))
+
+
+def serve(output_dir, port=8888):
+    import http.server
+    import socketserver
+    Handler = http.server.SimpleHTTPRequestHandler
+    chdir(output_dir)
+    with socketserver.TCPServer(("0.0.0.0", port), Handler) as httpd:
+        print("serving at port", port)
+        httpd.serve_forever()

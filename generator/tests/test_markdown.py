@@ -1,14 +1,15 @@
 import json
 import unittest
 
-from generator.HtmlContent import HtmlContent
-from generator.io import get_all_markdowns
+from generator.Content import Content as HtmlContent
 from generator.utils import mds_to_htmls, format_markdown, format_meta
-from settings import THE_PATH as the_path
+from settings import SOURCE_PATH as the_path
+from utils.io import get_all_markdowns, get_all_site_paths
 
 
 class CoreTestCase(unittest.TestCase):
-    md_path = get_all_markdowns(the_path)[0]
+    site_path = get_all_site_paths(the_path)[0]
+    md_path = get_all_markdowns(site_path)[0]
     expected_md = '''title: Recommendation, a learning app
 date: 2019-03-18 21:46:41
 category: Application
