@@ -54,12 +54,3 @@ class Site:
             with open(output_dir + content.url + '.html', 'w+') as file:
                 file.write(self.render.get_content_html(data=content))
 
-    @staticmethod
-    def serve(port=8888):
-        import http.server
-        import socketserver
-        Handler = http.server.SimpleHTTPRequestHandler
-        chdir(self.output_dir)
-        with socketserver.TCPServer(("", port), Handler) as httpd:
-            print("serving at port", port)
-            httpd.serve_forever()

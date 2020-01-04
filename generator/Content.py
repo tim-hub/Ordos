@@ -1,8 +1,9 @@
 import hashlib
 
+from amp_tools import TransformHtmlToAmp
 from markdown2 import markdown
 
-from custom_typings import ContentType, ContentName
+from custom_typings import ContentType
 from generator.utils import get_md_content, get_md_name, get_content_type, format_markdown
 from settings import MARKDOWN_EXTRA
 
@@ -38,8 +39,6 @@ class Content:
     def url(self):
         return get_md_name(self._md_path)
 
-
-
     @property
     def content_type(self) -> ContentType:
         return get_content_type(self.path)
@@ -49,9 +48,21 @@ class Content:
         return get_md_content(self.path)
 
     @property
-    def content_html(self):
+    def content_obj(self):
         return markdown(format_markdown(self.content), extras=MARKDOWN_EXTRA)
 
     @property
+    def content_html(self):
+        return self.content_obj
+
+    @property
+    def content_amp(self):
+        '''
+        this function is quite slow
+        :return:
+        '''
+        return TransformHtmlToAmp(self.content_obj)()
+
+    @property
     def metadata(self):
-        return self.content_html.metadata
+        return self.content_obj.metadata

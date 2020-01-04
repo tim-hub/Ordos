@@ -11,7 +11,7 @@ class SiteTestCase(unittest.TestCase):
     def test_sites(self):
         self.sites[0].save()
         serve(self.sites[0].output_dir)
-        self.assertEqual(True, True)
+        return
 
 
 if __name__ == '__main__':

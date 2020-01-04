@@ -23,7 +23,7 @@ class Render:
 
     @property
     def content(self) -> Template:
-        return self._env.get_template('content.html')
+        return self._env.get_template('content.jinja2')
 
     @property
     def home(self):
@@ -43,7 +43,7 @@ class Render:
         a collection of contents list only
         :return:
         '''
-        return self._env.get_template('list.html')
+        return self._env.get_template('list.jinja2')
 
 
     def get_content_html(self, data) -> str:

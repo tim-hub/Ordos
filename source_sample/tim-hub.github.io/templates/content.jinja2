@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html amp lang="en">
+<head>
+
+    {% include '_layout/amp_head.jinja2' %}
+    <title>{{ data.metadata.title }}</title>
+    <meta name="description" content="{{ data.metadata.description }}">
+    <meta name="author" content="{{ data.metadata.author }}">
+{#    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">#}
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="hash-value" content="{{ data.sha }}">
+</head>
+<body>
+<h1>{{ data.metadata.title }}</h1>
+<span>{{ data.metadata.category }}</span>
+<span>{{ data.metadata.tags }}</span>
+<span>{{ data.metadata.date }}</span>
+{{ data.content_html|safe }}
+
+</body>
+</html>
