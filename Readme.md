@@ -1,3 +1,8 @@
+# Ordos Multiple Static Sites Generator
+
+[![GitHub-Workflow-Status](https://img.shields.io/github/workflow/status/tim-hub/Ordos/Ordos-unit-test)](https://github.com/tim-hub/Ordos)
+[![codecov](https://codecov.io/gh/tim-hub/Ordos/branch/master/graph/badge.svg)](https://codecov.io/gh/tim-hub/Ordos)
+
 
 
 ## Why Ordos Static Site Generator

@@ -1,4 +1,4 @@
-name: Ordos unit test
+name: Ordos-unit-test
 
 on: [push]
 
