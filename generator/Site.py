@@ -54,3 +54,8 @@ class Site:
             with open(output_dir + content.url + '.html', 'w+') as file:
                 file.write(self.render.get_content_html(data=content))
 
+        with open(output_dir + 'index.html', 'w+') as file:
+            file.write(self.render.get_home_html(data={
+
+            }))
+

@@ -27,7 +27,7 @@ class Render:
 
     @property
     def home(self):
-        return self._env.get_template('home.html')
+        return self._env.get_template('home.jinja2')
 
     @property
     def archive(self):

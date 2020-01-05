@@ -1,6 +1,4 @@
 import hashlib
-
-from amp_tools import TransformHtmlToAmp
 from markdown2 import markdown
 
 from custom_typings import ContentType
@@ -56,13 +54,13 @@ class Content:
         return self.content_obj
 
     @property
-    def content_amp(self):
-        '''
-        this function is quite slow
-        :return:
-        '''
-        return TransformHtmlToAmp(self.content_obj)()
+    def content_short(self):
+        return self.content_obj.split('<!--more-->')[0]
 
     @property
     def metadata(self):
         return self.content_obj.metadata
+
+    @property
+    def amp(self):
+        return True
