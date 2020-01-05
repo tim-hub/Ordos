@@ -19,6 +19,8 @@ class Site:
         '''
         self.name = name
         self.site_path = site_path
+        if not path.exists(OUTPUT_PATH):
+            mkdir(OUTPUT_PATH)
         self.output_dir = path.abspath(OUTPUT_PATH) + '/' + self.name + '/'
         self.markdowns = get_all_markdowns(site_path)
         self.template_path = get_template_path(self.site_path)
