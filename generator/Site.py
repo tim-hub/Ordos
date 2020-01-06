@@ -1,11 +1,11 @@
 import hashlib
-from os import path, mkdir, chdir
+from os import path, mkdir
 from typing import Iterator
 
 from generator.Content import Content
 from generator.utils import get_all_markdowns
 from render.Render import Render
-from settings import OUTPUT_PATH
+from settings import OUTPUT_PATH, SITES
 from utils.io import get_template_path
 
 
@@ -25,14 +25,18 @@ class Site:
         self.markdowns = get_all_markdowns(site_path)
         self.template_path = get_template_path(self.site_path)
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(self.name)
 
-    def __eq__(self, other: any) -> bool:
+    def __eq__(self, other) -> bool:
         return hash(self) == hash(other)
 
     @property
-    def sha(self):
+    def url(self) -> str:
+        return SITES[self.name]['url']
+
+    @property
+    def sha(self) -> str:
         return hashlib.sha256(self.name.encode('utf-8')).hexdigest()
 
     @property
@@ -42,22 +46,28 @@ class Site:
     @property
     def contents(self) -> Iterator[Content]:
         def get_html(md: str):
-            content = Content(md)
+            content = Content(md, self.url)
             return content
 
         return map(lambda md: get_html(md), self.markdowns)
+
+    def contents_sorted(self):
+        contents_sort = list(self.contents)
+        contents_sort.sort(key=lambda c: c.created, reverse = True)
+        return contents_sort
 
     def save(self):
         output_dir = self.output_dir
         if not path.exists(output_dir):
             mkdir(output_dir)
 
-        for content in self.contents:
+        for content in self.contents_sorted():
             with open(output_dir + content.url + '.html', 'w+') as file:
                 file.write(self.render.get_content_html(data=content))
 
         with open(output_dir + 'index.html', 'w+') as file:
-            file.write(self.render.get_home_html(data={
-
-            }))
-
+            file.write(self.render.get_home_html(
+                data= {
+                    'contents': self.contents_sorted()
+                }
+            ))

@@ -60,7 +60,7 @@ Solo learn is an app which is quite similar to Duolingo, the difference is that 
         r = mds_to_htmls(the_path)
 
     def test_content_class(self):
-        html = HtmlContent(self.md_path)
+        html = HtmlContent(self.md_path, 'tmp_url')
         self.assertEqual(html.content_html, self.expected_html)
         self.assertEqual(html.metadata, json.loads(self.expected_metadata))
 

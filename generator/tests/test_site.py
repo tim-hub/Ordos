@@ -1,12 +1,12 @@
 import unittest
+
 from generator.Site import Site
-from generator.utils import serve
 from settings import SOURCE_PATH as the_path
-from utils.io import get_all_site_paths
+from utils.io import get_all_sites
+
 
 class SiteTestCase(unittest.TestCase):
-
-    sites = list(map(lambda s: Site(s, 'tim-hub.github.io'), get_all_site_paths(the_path)))
+    sites = list(map(lambda s: Site(s['path'], s['name']), get_all_sites(the_path)))
 
     def test_sites(self):
         self.sites[0].save()

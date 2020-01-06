@@ -1,4 +1,5 @@
 import hashlib
+
 from markdown2 import markdown
 
 from custom_typings import ContentType
@@ -8,7 +9,8 @@ from settings import MARKDOWN_EXTRA
 
 class Content:
 
-    def __init__(self, md_path: str):
+    def __init__(self, md_path: str, site_url: str):
+        self._site_url = site_url
         self._md_path = md_path
 
     def __hash__(self):
@@ -27,15 +29,23 @@ class Content:
 
     @property
     def name(self) -> str:
-        return self.metadata.title
+        return self.metadata['title']
 
     @property
     def title(self) -> str:
         return self.name
 
     @property
+    def created(self) -> str:
+        return self.metadata['date']
+
+    @property
     def url(self):
         return get_md_name(self._md_path)
+
+    @property
+    def permanent_url(self):
+        return self._site_url + get_md_name(self._md_path)
 
     @property
     def content_type(self) -> ContentType:
