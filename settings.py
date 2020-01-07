@@ -8,8 +8,7 @@ SITES = {
         'name': 'tim-hub.github.io',
         'url': 'https://tim.bai.uno',
         'keywords': 'nz, tech',
-        'description': 'a site',
+        'description': 'a site_name',
         'author': 'tim'
     },
 }
-

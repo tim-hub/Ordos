@@ -1,13 +1,14 @@
 import ntpath
 from functools import reduce
+from os import chdir
 from typing import List
 
 from markdown2 import markdown
 
 from custom_typings import NameHtmlTuple, ContentType, ContentName
-from utils.io import get_all_markdowns
 from settings import META_SEPARATOR, MARKDOWN_EXTRA
-from os import chdir
+from utils.io import get_all_markdowns
+
 
 def format_meta(md_meta: str) -> str:
     def join_two_lines(a: str, b: str) -> str:

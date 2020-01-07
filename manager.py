@@ -1,9 +1,10 @@
-import sys
-import unittest
-from os import chdir, path
 import http.server
 import socketserver
-from settings import SITES, OUTPUT_PATH
+import sys
+from os import chdir, path
+
+from generator.Site import Site
+from settings import OUTPUT_PATH, SOURCE_PATH
 
 if len(sys.argv) > 3:
     print('You have specified too many arguments')
@@ -13,18 +14,19 @@ if len(sys.argv) < 2:
     print('You need to specify command name')
     sys.exit()
 
-command:str = sys.argv[1]
-
+command: str = sys.argv[1]
 
 if command == 'generate':
-    print('to run')
+    site_name: str = sys.argv[2]
+    site = Site(path.join(SOURCE_PATH, site_name), site_name)
+    site.generate()
 
 # force regenerate
 # view locally
 
 if command == 'serve':
-    site:str = sys.argv[2]
-    work_dir = path.join(path.dirname(__file__), OUTPUT_PATH + site)
+    site_name: str = sys.argv[2]
+    work_dir = path.join(path.dirname(__file__), OUTPUT_PATH + site_name)
     chdir(work_dir)
 
     PORT = 8888

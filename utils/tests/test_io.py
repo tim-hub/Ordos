@@ -1,7 +1,7 @@
 import unittest
 
-from utils.io import get_all_markdowns, get_all_dirs, get_all_site_paths
 from settings import SOURCE_PATH as the_path
+from utils.io import get_all_markdowns, get_all_dirs, get_all_site_paths
 
 
 class IOSTestCase(unittest.TestCase):

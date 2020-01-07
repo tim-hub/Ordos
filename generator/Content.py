@@ -41,11 +41,11 @@ class Content:
 
     @property
     def url(self):
-        return get_md_name(self._md_path)
+        return get_md_name(self._md_path) + '.html'
 
     @property
     def permanent_url(self):
-        return self._site_url + get_md_name(self._md_path)
+        return self._site_url + self.url
 
     @property
     def content_type(self) -> ContentType:
