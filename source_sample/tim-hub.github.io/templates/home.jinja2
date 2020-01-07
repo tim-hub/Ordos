@@ -1,5 +1,16 @@
-{% for c in contents %}
+{% extends '_layout/base.jinja2' %}
 
-    <a>{{ c.name }}</a>
 
-{% endfor %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+
+    {% for content in contents %}
+
+        <a>{{ content.name }}</a>
+
+    {% endfor %}
+
+{% endblock %}

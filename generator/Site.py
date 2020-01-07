@@ -11,19 +11,19 @@ from utils.io import get_template_path
 
 class Site:
 
-    def __init__(self, site_path: str, name: str):
+    def __init__(self, source_path: str, name: str):
         '''
 
-        :param site_path: the source
+        :param source_path: the source
         :param name:
         '''
         self.name = name
-        self.site_path = site_path
+        self.source_path = source_path
         if not path.exists(OUTPUT_PATH):
             mkdir(OUTPUT_PATH)
         self.output_dir = path.abspath(OUTPUT_PATH) + '/' + self.name + '/'
-        self.markdowns = get_all_markdowns(site_path)
-        self.template_path = get_template_path(self.site_path)
+        self.markdowns = get_all_markdowns(source_path)
+        self.template_path = get_template_path(self.source_path)
 
     def __hash__(self) -> int:
         return hash(self.name)
@@ -53,8 +53,16 @@ class Site:
 
     def contents_sorted(self):
         contents_sort = list(self.contents)
-        contents_sort.sort(key=lambda c: c.created, reverse = True)
+        contents_sort.sort(key=lambda c: c.created, reverse=True)
         return contents_sort
+
+    def generate(self):
+        self.copy_files()
+        self.save()
+
+    def copy_files(self):
+        from distutils.dir_util import copy_tree
+        copy_tree(self.source_path + '/root', self.output_dir)
 
     def save(self):
         output_dir = self.output_dir
@@ -67,7 +75,10 @@ class Site:
 
         with open(output_dir + 'index.html', 'w+') as file:
             file.write(self.render.get_home_html(
-                data= {
-                    'contents': self.contents_sorted()
+                data={
+                    'contents': self.contents_sorted(),
+                    'data': {
+                        'metadata': {}
+                    }
                 }
             ))

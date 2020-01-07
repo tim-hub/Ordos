@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="mobile-web-app-capable" content="yes">
     {% block head %} {% include '_layout/head_meta.jinja2' %} {% endblock %}
-    {#	<link rel="stylesheet" href="static/css/bootstrap.css"#}
-    {#    <link rel="stylesheet" href="static/css/style.css">#}
+    <link rel="stylesheet" href="static/pure-min.css"/>
 </head>
 
 <body>
 <main id="content">{% block content %}{% endblock %}</main>
-{%  include '_layout/footer.jinja2' %}
+{% include '_layout/footer.jinja2' %}
 </body>
 {#js#}
 </html>

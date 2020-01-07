@@ -1,7 +1,11 @@
 import sys
 import unittest
+from os import chdir, path
+import http.server
+import socketserver
+from settings import SITES, OUTPUT_PATH
 
-if len(sys.argv) > 2:
+if len(sys.argv) > 3:
     print('You have specified too many arguments')
     sys.exit()
 
@@ -11,6 +15,7 @@ if len(sys.argv) < 2:
 
 command:str = sys.argv[1]
 
+
 if command == 'generate':
     print('to run')
 
@@ -18,8 +23,9 @@ if command == 'generate':
 # view locally
 
 if command == 'serve':
-    import http.server
-    import socketserver
+    site:str = sys.argv[2]
+    work_dir = path.join(path.dirname(__file__), OUTPUT_PATH + site)
+    chdir(work_dir)
 
     PORT = 8888
     Handler = http.server.SimpleHTTPRequestHandler
