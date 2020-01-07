@@ -1,4 +1,3 @@
-import hashlib
 from os import path
 
 from jinja2 import Environment, select_autoescape, Template, FileSystemLoader
@@ -27,7 +26,7 @@ class Render:
 
     @property
     def home(self):
-        return self._env.get_template('home.jinja2')
+        return self._env.get_template('index.jinja2')
 
     @property
     def archive(self):
@@ -45,18 +44,14 @@ class Render:
         '''
         return self._env.get_template('list.jinja2')
 
-
     def get_content_html(self, data) -> str:
-        return self.content.render({'data':data})
+        return self.content.render({'data': data})
 
-
-    def get_home_html(self, data)-> str:
+    def get_home_html(self, data) -> str:
         return self.home.render(data)
 
-
-    def get_archive_html(self, data)-> str:
+    def get_archive_html(self, data) -> str:
         return self.archive.render(data)
-
 
     def get_list_html(self, data) -> str:
         return self.list.render(data)
