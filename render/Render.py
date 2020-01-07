@@ -34,7 +34,7 @@ class Render:
         a collections of all contents
         :return:
         '''
-        return self._env.get_template('archive.html')
+        return self._env.get_template('archive.jinja2')
 
     @property
     def list(self):
