@@ -5,8 +5,7 @@ from typing import Iterator
 from generator.Content import Content
 from generator.utils import get_all_markdowns
 from render.Render import Render
-from settings import OUTPUT_PATH, SITES
-from utils.io import get_template_path
+from settings import OUTPUT_PATH, SITES, TEMPLATE_PATH
 
 
 class Site:
@@ -23,7 +22,7 @@ class Site:
             mkdir(OUTPUT_PATH)
         self.output_dir = path.abspath(OUTPUT_PATH) + '/' + self.name + '/'
         self.markdowns = get_all_markdowns(source_path)
-        self.template_path = get_template_path(self.source_path)
+        self.template_path = TEMPLATE_PATH + SITES[self.name]['template']
 
     def __hash__(self) -> int:
         return hash(self.name)
@@ -63,6 +62,7 @@ class Site:
     def copy_files(self):
         from distutils.dir_util import copy_tree
         copy_tree(self.source_path + '/root', self.output_dir)
+        copy_tree(self.template_path + '/root', self.output_dir)
 
     def save(self):
         output_dir = self.output_dir

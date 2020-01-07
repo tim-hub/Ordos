@@ -3,13 +3,13 @@ import unittest
 from jinja2 import Template
 
 from render.Render import Render
-from settings import SOURCE_PATH as the_path
-from utils.io import get_all_site_paths, get_template_path
+from settings import SOURCE_PATH as the_path, TEMPLATE_PATH, SITES
 
 
 class RenderTestCase(unittest.TestCase):
-    site_path = get_all_site_paths(the_path)[0]
-    render = Render(get_template_path(site_path))
+    site_name = SITES['tim-hub.github.io']['name']
+    site_path = the_path + SITES['tim-hub.github.io']['name']
+    render = Render(TEMPLATE_PATH + SITES['tim-hub.github.io']['template'])
 
     def test_render(self):
         self.assertEqual(isinstance(self.render, Render), True)

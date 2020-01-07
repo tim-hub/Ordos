@@ -4,6 +4,7 @@ from os.path import isfile, join, isdir
 from typing import List, Dict, Union, Any
 
 
+
 def get_all_files(the_path: str) -> List[str]:
     return [f for f in listdir(the_path) if isfile(join(the_path, f))]
 
@@ -29,5 +30,3 @@ def get_all_markdowns(the_path: str) -> List[str]:
     return [f for f in glob.glob(path.abspath(the_path) + '/**/*.[Mm][Dd]', recursive=True)]
 
 
-def get_template_path(site_path: str) -> str:
-    return site_path + '/templates'
